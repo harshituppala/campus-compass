@@ -1,0 +1,25 @@
+{
+  "name": "campus-compass",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "react-hot-toast": "^2.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
+  },
+  "browserslist": {
+    "production": [">0.2%"],
+    "development": ["last 1 chrome version"]
+  },
+  "homepage": "https://harshituppala.github.io/campus-compass"
+}
