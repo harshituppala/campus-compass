@@ -1,94 +1,26 @@
-# MUN Campus Compass 🧭
+# Campus Compass
 
-**Live App → [harshituppala.github.io/campus-compass](https://harshituppala.github.io/campus-compass)**
+A React prototype for browsing campus events, study spaces and student resources at Memorial University of Newfoundland. Search, category filters and a schematic map give different ways to explore the same local dataset.
 
-An interactive campus discovery platform for Memorial University of Newfoundland students — find events, study spaces, clubs, resources, food, health services, and career opportunities, all in one place with map and list views.
+## Scope
 
----
+Listings are hard-coded in `src/App.js`. Event dates, availability counts and contacts are illustrative and may be out of date. This is not an official university directory, booking system or live campus feed. Confirm details with the university before relying on a listing.
 
-## The Problem
+The map projects coordinates onto a custom SVG; it does not provide navigation or authoritative building geometry. The project is frontend-only: there is no account service, database or live capacity tracking.
 
-MUN has hundreds of events, resources, and spaces that students simply never discover. Information is scattered across department websites, Facebook groups, and bulletin boards. There's no single searchable, filterable interface for campus life.
+## Run locally
 
-## The Solution
-
-Campus Compass aggregates everything into a clean, fast, searchable app with:
-- **7 categories** — Events, Study Spaces, Clubs, Resources, Food, Health & Wellness, Career
-- **List view** with search and tag filtering
-- **Map view** with interactive pins on a campus layout
-- **Detail panels** with capacity tracking, contact info, and registration links
-- **Urgency indicators** — "Only 12 spots left!" when events fill up
-- **Featured listings** for high-priority items
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | React 18 |
-| Styling | Inline CSS with design tokens |
-| Map | Custom SVG campus layout with coordinate projection |
-| Deployment | GitHub Pages (`gh-pages`) |
-| Data | Curated MUN campus dataset (extensible to REST API) |
-
----
-
-## Architecture
-
-```
-App.js
-  ├── Data Layer        ← LISTINGS[] with real MUN locations, coordinates, metadata
-  ├── CampusMap         ← SVG map with lat/lng → pixel projection, clickable pins
-  ├── ListingCard       ← Filterable card with urgency, category badge, featured flag
-  ├── DetailPanel       ← Full detail view with capacity bar, tags, mailto CTA
-  └── Filter System     ← Category tabs + full-text search with useMemo
-```
-
-**Coordinate Projection:**
-Real lat/lng coordinates are projected to SVG pixel positions using a simple linear transform over MUN's bounding box — the same principle used in web mapping libraries like Leaflet.
-
----
-
-## Running Locally
-
-```bash
-git clone https://github.com/harshituppala/campus-compass
-cd campus-compass
-npm install
+```sh
+npm ci
 npm start
-# → http://localhost:3000
 ```
 
-## Deploying to GitHub Pages (Free)
+Open http://localhost:3000. `npm run build` creates a production build. `npm run deploy` publishes it to the repository's configured GitHub Pages destination; deployment availability has not been reverified in this documentation pass.
 
-```bash
-npm run deploy
-# Builds and pushes to gh-pages branch automatically
-# Live at https://harshituppala.github.io/campus-compass
-```
+## Implementation
 
----
+React manages the selected category, search query, map/list view and detail panel. Filtering runs over the bundled listings. Keeping the data in one file made the interaction prototype straightforward, but prevents independent content updates and makes stale dates easy to miss.
 
-## Roadmap
+A useful next step would be a maintained data source with provenance and a visible last-reviewed date. Authentication and notifications would not solve the current data-quality problem.
 
-- [ ] REST API backend (Node.js + PostgreSQL) for real-time data
-- [ ] Student auth via MUN login (OAuth)
-- [ ] Event submission form for clubs and departments
-- [ ] Push notifications for upcoming events
-- [ ] Integration with MUN Events calendar API
-- [ ] Google Maps API for accurate building navigation
-
----
-
-## Project Context
-
-Built as part of my CICS internship application portfolio. Addresses a genuine discoverability gap at MUN — information about campus life is fragmented across dozens of unconnected sources. This project demonstrates full-stack thinking (even in a frontend-only MVP), real product design decisions, and understanding of user needs within a community I'm part of.
-
----
-
-## Author
-
-**Harshit Kumar Uppala**
-B.Sc. Computer Science, Memorial University of Newfoundland
-[github.com/harshituppala](https://github.com/harshituppala) · hkuppala@mun.ca
+No user study or automated interaction test suite is recorded in this repository.
